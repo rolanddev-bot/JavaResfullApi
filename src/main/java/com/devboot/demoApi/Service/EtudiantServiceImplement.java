@@ -15,21 +15,29 @@ public class EtudiantServiceImplement implements EtudiantService {
     private final EtudiantRepository etudiantRepository;
     @Override
     public Etudiant creer(Etudiant etudiant) {
-        return null;
+        return etudiantRepository.save(etudiant);
     }
 
     @Override
     public List<Etudiant> lire() {
-        return null;
+        return etudiantRepository.findAll();
     }
 
     @Override
     public Etudiant modifier(Long id, Etudiant etudiant) {
-        return null;
+      return etudiantRepository.findById(id).map(
+                p-> {
+                    p.setAge(etudiant.getAge());
+                    p.setNom(etudiant.getNom());
+                    p.setPrenom(etudiant.getPrenom());
+                  return   etudiantRepository.save(p);
+                }).orElseThrow(()-> new RuntimeException("ddddddd"));
+
     }
 
     @Override
-    public Etudiant supprimer(Long id) {
-        return null;
+    public String  supprimer(Long id) {
+         etudiantRepository.deleteById(id);
+         return "suppression effectué avec succès!";
     }
 }

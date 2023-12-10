@@ -12,5 +12,5 @@ public interface EtudiantService {
 
     Etudiant modifier(Long id, Etudiant etudiant);
 
-    Etudiant supprimer(Long id);
+    String  supprimer(Long id);
 }
